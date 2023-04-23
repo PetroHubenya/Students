@@ -9,47 +9,43 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer
 {
-    internal class StudentDAL
+    public class StudentDAL
     {
-        public List<StudentEntity> students = new();
-        public void Students()
-        {
-            try
-            {
-                // Create connection string.
-                string connectionString = "Data Source=DESKTOP-I1QO562;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False";
+        
+        public List<StudentEntity> studentsListDAL = new();
+        public List<StudentEntity> FetchStudents()
+        {   
+            // Create connection string.
+            string connectionString = "Data Source=DESKTOP-I1QO562;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False";
                 
-                // Create connection to the SQL database.
-                using (SqlConnection connection = new SqlConnection(connectionString))
+            // Create connection to the SQL database.
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                // Create SQL query.
+                string sqlQuery = "SELECT * FROM Student;";
+
+                // Create SQL command.
+                using (SqlCommand command = new SqlCommand(sqlQuery, connection)) 
                 {
-                    connection.Open();
-
-                    // Create SQL query.
-                    string sqlQuery = "SELECT * FROM Student;";
-
-                    // Create SQL command.
-                    using (SqlCommand command = new SqlCommand(sqlQuery, connection)) 
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        using (SqlDataReader reader = command.ExecuteReader())
+                        while (reader.Read())
                         {
-                            while (reader.Read())
-                            {
-                                StudentEntity student = new StudentEntity();
-                                student.Id = reader.GetInt32(0);
-                                student.Name = reader.GetString(1);
-                                student.Email = reader.GetString(2);
-                                student.Age = reader.GetInt32(3);
+                            StudentEntity student = new StudentEntity();
+                            student.Id = reader.GetInt32(0);
+                            student.Name = reader.GetString(1);
+                            student.Email = reader.GetString(2);
+                            student.Age = reader.GetInt32(3);
 
-                                students.Add(student);
-                            }
+                            studentsListDAL.Add(student);
                         }
                     }
                 }
             }
-            catch (Exception ex)
-            {
-
-            }
+            
+            return studentsListDAL;
         }
     }
 }
