@@ -11,7 +11,6 @@ namespace DataAccessLayer
 {
     public class StudentDAL
     {
-        
         public List<StudentEntity> studentsListDAL = new();
         public List<StudentEntity> FetchStudents()
         {   

@@ -10,7 +10,7 @@ namespace BusinessLogicLayer
 {
     public class StudentBLL
     {
-        
+        /*
         readonly List<StudentEntity> students = new()
         {
             new StudentEntity()
@@ -37,10 +37,18 @@ namespace BusinessLogicLayer
                 Age = 20
             }
         };
+        */
+
+        private readonly StudentDAL _studentDAL;
+
+        public StudentBLL(StudentDAL studentDAL)
+        {
+            _studentDAL = studentDAL;
+        }
 
         public List<StudentEntity> GetStudentBelow3()
-        {
-            List<StudentEntity> studentsBelow3 = students.Where(s => s.Id < 3).ToList();
+        {   
+            List<StudentEntity> studentsBelow3 = _studentDAL.FetchStudents().Where(s => s.Id < 3).ToList();
             
             return studentsBelow3;
         }
