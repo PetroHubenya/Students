@@ -16,7 +16,7 @@ namespace DataAccessLayer
         public List<StudentEntity> FetchStudents()
         {   
             // Create connection string.
-            string connectionString = "Data Source=DESKTOP-I1QO562;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False";
+            string connectionString = "Data Source=DESKTOP-I1QO562;Initial Catalog=Students;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False";
                 
             // Create connection to the SQL database.
             using (SqlConnection connection = new SqlConnection(connectionString))
