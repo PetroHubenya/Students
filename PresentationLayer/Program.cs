@@ -1,7 +1,14 @@
+using System.Configuration;
+using DataAccessLayer;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddDbContext<StudentsContext>(options =>
+        options.UseSqlServer(Configuration.GetConnectionString("StudentsContext")));
 
 var app = builder.Build();
 

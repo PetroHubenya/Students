@@ -10,7 +10,11 @@ namespace DataAccessLayer
 {
     public class StudentsContext : DbContext
     {
-        public StudentsContext(DbContextOptions<StudentsContext> options) : base(options) { }
-        public DbSet<StudentEntity> Students { get; set; }
+        public StudentsContext(DbContextOptions<StudentsContext>option) : base(option)
+        {
+            
+        }
+
+        public DbSet<StudentEntity>Students { get; set; }
     }
 }
