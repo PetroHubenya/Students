@@ -15,8 +15,6 @@ It includes the following projects:
 
 * StudentDAL.cs file is responsible for fetching the data from the database.
 
-* StudentsContext.cs file is responsible for communication with database by means of Entity Framework. 
-
 ### PresentationLayer. This project is connected with Business Logic Layer and Common Layer. It is built on ASP.NER Razor Pages.
 
 The application utilizes local MS SQL Server database.
