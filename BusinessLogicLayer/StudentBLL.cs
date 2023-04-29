@@ -1,10 +1,12 @@
 ﻿using CommonLayer;
 using DataAccessLayer;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace BusinessLogicLayer
 {
@@ -14,7 +16,8 @@ namespace BusinessLogicLayer
 
         public StudentBLL()
         {
-            _studentDAL = new StudentDAL();
+            var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+            _studentDAL = new StudentDAL(configuration);
         }
 
         public List<StudentEntity> GetStudentBelow3()

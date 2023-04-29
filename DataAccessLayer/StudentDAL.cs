@@ -7,6 +7,7 @@ using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccessLayer
 {
@@ -14,17 +15,19 @@ namespace DataAccessLayer
     {
         private readonly IConfiguration _configuration;
 
-        
-
-
-        
         public List<StudentEntity> studentsListDAL = new();
+
+        public StudentDAL(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         public List<StudentEntity> FetchStudents()
         {   
             // Create connection string.
-            string connectionString = "Data Source=DESKTOP-I1QO562;Initial Catalog=Students;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False";
 
-            string connectionString1 = _configuration.GetConnectionString("StudentsContext");
+            // string connectionString = "Data Source=DESKTOP-I1QO562;Initial Catalog=Students;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False";
+            string connectionString = _configuration.GetConnectionString("StudentsContext");
 
             // Create connection to the SQL database.
             using (SqlConnection connection = new SqlConnection(connectionString))
