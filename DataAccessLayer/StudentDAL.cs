@@ -8,21 +8,34 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
+using System.Data.Entity;
 
 namespace DataAccessLayer
 {
     public class StudentDAL
     {
-        private readonly IConfiguration _configuration;
+        // private readonly IConfiguration _configuration;
 
-        public List<StudentEntity> studentsListDAL = new();
+		private readonly StudentsContext _studentsContext;
 
+		// public List<StudentEntity> studentsListDAL = new();
+
+        /*
         public StudentDAL(IConfiguration configuration)
         {
             _configuration = configuration;
         }
+        */
 
-        public List<StudentEntity> FetchStudents()
+		public StudentDAL(StudentsContext studentsContext)
+		{
+			_studentsContext = studentsContext;
+		}
+
+		public static List<StudentEntity> StudentsList { get; set; }
+
+        /*
+		public List<StudentEntity> FetchStudents()
         {   
             // Create connection string.
 
@@ -58,5 +71,11 @@ namespace DataAccessLayer
             
             return studentsListDAL;
         }
-    }
+        */
+
+		public async Task GetAllStudentsAsync()
+		{
+			StudentsList = await _studentsContext.Students.ToListAsync();			
+		}
+	}
 }
