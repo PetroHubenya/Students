@@ -1,0 +1,42 @@
+﻿@page
+@model PresentationLayer.Pages.Students.IndexModel
+@{
+    ViewData["Title"] = "Students List";
+}
+
+<h1>@ViewData["Title"]</h1>
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Age</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var student in Model.Students)
+            {
+                <tr>
+                    <td>@student.Id</td>
+                    <td>@student.Name</td>
+                    <td>@student.Email</td>
+                    <td>@student.Age</td>
+                    <td>
+                        <a class="btn btn-primary btn-sm" asp-page="./Details" asp-route-id="@student.Id">
+                            Details
+                        </a>
+                        <a class="btn btn-primary btn-sm" asp-page="./Edit" asp-route-id="@student.Id">
+                            Edit
+                        </a>
+                        <a class="btn btn-danger btn-sm" asp-page="./Delete" asp-route-id="@student.Id">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

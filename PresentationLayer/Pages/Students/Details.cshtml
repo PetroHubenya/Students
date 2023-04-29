@@ -1,0 +1,24 @@
+﻿@page
+@model PresentationLayer.Pages.Students.DetailsModel
+@{
+	ViewData["Title"] = "Detail";
+}
+
+<div>
+	<h1>
+		@ViewData["Title"]
+	</h1>
+	<a asp-page="./Index">
+		Back to list
+	</a>
+</div>
+
+<dl>
+	<dt>
+		@Html.DisplayNameFor(model => model.Student.Id)
+	</dt>
+	<dd>
+		@Html.DisplayFor(model => model.Student.Id)
+	</dd>
+</dl>
+
