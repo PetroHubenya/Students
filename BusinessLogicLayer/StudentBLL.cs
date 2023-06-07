@@ -13,68 +13,22 @@ namespace BusinessLogicLayer
 {
     public class StudentBLL
     {
-        public List<StudentEntity> StudentsListBll { get; set; }
-
-        public List<StudentEntity> StudentsListBelow3Bll { get; set; }
-
-        public StudentEntity StudentBll { get; set; }
-        
-        
-        // private readonly StudentDAL _studentDAL;
-
-        // private readonly StudentsContext _studentsContext;
-        
-        /*
-        public StudentBLL()
-        {
-            var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
-            _studentDAL = new StudentDAL(configuration);
-        }
-        */
-
-        /*
-		public StudentBLL(StudentsContext studentsContext)
+		private readonly StudentDAL studentDAL;		
+		public List<StudentEntity> GetAllStudents()
 		{
-			_studentsContext = studentsContext;
+			List<StudentEntity> students = studentDAL.GetStudents();
+			return students;
 		}
-        */
-
-		/*
-        public List<StudentEntity> GetAllStudents()
-        {
-            List<StudentEntity> getAllSudents = _studentDAL.FetchStudents();
-            return getAllSudents;
-        }
-        */
-        
-        /*
-        public List<StudentEntity> GetStudentBelow3()
-        {
-            List<StudentEntity> studentsBelow3 = _studentDAL.FetchStudents().Where(s => s.Id < 3).ToList();
-            
-            return studentsBelow3;
-        }
-        */
-
-        // To get list of all students.
-		public void GetStudents()
+		public List<StudentEntity> GetStudentsBelow3()
 		{
-			List<StudentEntity> students = StudentDAL.StudentsList.ToList();
-			StudentsListBll = students;
-		}
-
-		// To get list of students with Id below 3.
-		public void GetStudentsBelow3()
+			List<StudentEntity> students = studentDAL.GetStudents().Where(s => s.Id < 3).ToList();
+			return students;			
+		}		
+		public StudentEntity GetStudentById(int id)
 		{
-			List<StudentEntity> studentsBelow3 = StudentDAL.StudentsList.Where(s => s.Id < 3).ToList();
-			StudentsListBelow3Bll = studentsBelow3;
-		}
-
-		// To get single student with needed Id.
-		public void GetStudent(int id)
-		{
-			StudentEntity student = StudentDAL.StudentsList.Find(s => s.Id == id);
-            StudentBll = student;
+			List<StudentEntity> students = studentDAL.GetStudents();
+			StudentEntity student = students.Find(s => s.Id == id);
+            return student;
 		}
 	}
 }

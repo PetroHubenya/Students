@@ -11,9 +11,11 @@ namespace PresentationLayer.Pages
     {
         public List<StudentEntity> Students { get; set; }
 
-        public void OnGet(StudentBLL studentBLL)
+        public List<StudentEntity> OnGet(StudentBLL studentBLL)
         {
-            Students = studentBLL.GetStudentBelow3();
+            List<StudentEntity> s = studentBLL.GetAllStudents();
+			Students = s;
+            return s;
         }
     }
 }

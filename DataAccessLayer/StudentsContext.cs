@@ -14,7 +14,6 @@ namespace DataAccessLayer
         {
 
         }
-
         public DbSet<StudentEntity> Students { get; set; }
     }
 }
